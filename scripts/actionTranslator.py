@@ -26,11 +26,12 @@ def actionReceiver(data, publishers):
     
     if command == "steering":
         rospy.loginfo("Steering command sent: " + str(parameter))
-        
         steeringPublisher.publish(toSend)
     elif command == "throttle":
+        rospy.loginfo("Throttle command sent: " + str(parameter))
         throttlePublisher.publish(toSend)
     elif command == "brake":
+        rospy.loginfo("Brake command sent: " + str(parameter))
         brakePublisher.publish(toSend)
     else:
         rospy.info("Unknown command received, no action taken")

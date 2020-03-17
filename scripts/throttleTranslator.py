@@ -14,6 +14,7 @@ from std_msgs.msg import Float64
 def throttleReceiver(data, publisher):
     throttleString = str(data.data)
     message = str("throttle(" + throttleString + ")")
+    rospy.loginfo("Perception: " + message)
     publisher.publish(message)
 
 
