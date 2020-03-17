@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-# Translates lka steering to perceptions for savi
+# Translates throttle to perceptions for savi
 
 # @author: Patrick Gavigan
 # @date: 17 Mar 2020
@@ -11,28 +11,28 @@ from std_msgs.msg import Float64
 
 
 # Callback function for translating the messages and sending them along
-def lkaSteeringReceiver(data, publisher):
-    angleString = str(data.data)
-    message = str("lkaSteering(" + angleString + ")")
+def throttleReceiver(data, publisher):
+    throttleString = str(data.data)
+    message = str("throttle(" + throttleString + ")")
     publisher.publish(message)
 
 
-# Main method for this node, sets up the callback for the lka/steering receiver
+# Main method for this node, sets up the callback for the acc/throttle receiver
 # as well as the publisher for the perceptions to be sent to.
-def lkaTranslator():
-    rospy.init_node('lkaTranslator', anonymous=True)
+def throttleTranslator():
+    rospy.init_node('throttleTranslator', anonymous=True)
     
     # Setup the publisher
     perceptionPublisher = rospy.Publisher('perceptions', String, queue_size=10)
     
     # Setup the subscribers
-    rospy.Subscriber('lka/steering', Float64, lkaSteeringReceiver, perceptionPublisher)
+    rospy.Subscriber('acc/throttle', Float64, throttleReceiver, perceptionPublisher)
 
     # spin() simply keeps python from exiting until this node is stopped
     rospy.spin()
 
 if __name__ == '__main__':
     try:
-        lkaTranslator()
+        throttleTranslator()
     except rospy.ROSInterruptException:
         pass
