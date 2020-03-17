@@ -14,6 +14,7 @@ from std_msgs.msg import Float64
 def lkaSteeringReceiver(data, publisher):
     angleString = str(data.data)
     message = str("lkaSteering(" + angleString + ")")
+    rospy.loginfo("Perception: " + message)
     publisher.publish(message)
 
 

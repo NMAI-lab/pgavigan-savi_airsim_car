@@ -14,6 +14,7 @@ from std_msgs.msg import Float64
 def brakeReceiver(data, publisher):
     brakeString = str(data.data)
     message = str("brake(" + brakeString + ")")
+    rospy.loginfo("Perception: " + message)
     publisher.publish(message)
 
 
