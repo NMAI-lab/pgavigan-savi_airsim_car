@@ -21,13 +21,17 @@ def actionReceiver(data, publishers):
     parameter = re.search(r'\((.*?)\)',message).group(1)
     command = message.split('(')[0]
     
+    toSend = Float64()
+    toSend.data = float(parameter)
+    
     if command == "steering":
         rospy.loginfo("Steering command sent: " + str(parameter))
-        steeringPublisher.publish(parameter)
+        
+        steeringPublisher.publish(toSend)
     elif command == "throttle":
-        throttlePublisher.publish(parameter)
+        throttlePublisher.publish(toSend)
     elif command == "brake":
-        brakePublisher.publish(parameter)
+        brakePublisher.publish(toSend)
     else:
         rospy.info("Unknown command received, no action taken")
 
