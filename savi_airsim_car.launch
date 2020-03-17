@@ -1,0 +1,6 @@
+<launch>
+  <node name="actionTranslator" pkg="savi_airsim_car" type="actionTranslator.py" />
+  <node name="lkaTranslator" pkg="savi_airsim_car" type="lkaTranslator.py" />
+  <node name="throttleTranslator" pkg="savi_airsim_car" type="throttleTranslator.py" />
+  <node name="brakeTranslator" pkg="savi_airsim_car" type="brakeTranslator.py" />
+</launch>
