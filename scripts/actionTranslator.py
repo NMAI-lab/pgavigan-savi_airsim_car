@@ -24,13 +24,13 @@ def actionReceiver(data, publishers):
     toSend = Float64()
     toSend.data = float(parameter)
     
-    if command == "steering":
+    if command == "setSteering":
         rospy.loginfo("Steering command sent: " + str(parameter))
         steeringPublisher.publish(toSend)
-    elif command == "throttle":
+    elif command == "setThrottle":
         rospy.loginfo("Throttle command sent: " + str(parameter))
         throttlePublisher.publish(toSend)
-    elif command == "brake":
+    elif command == "setBrake":
         rospy.loginfo("Brake command sent: " + str(parameter))
         brakePublisher.publish(toSend)
     else:
