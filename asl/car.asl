@@ -11,6 +11,13 @@
 // Initial goal 
 !drive.
  
++!drive
+	: 	throttle(THROTTLE)
+	<-	setThrottle(THROTTLE)
+		!drive.
+
+		
+/**
 // Main plan
 +!drive
 	:	lkaSteering(STEERING) &
@@ -20,53 +27,7 @@
 		setSteering(STEERING);
 		setThrottle(THROTTLE);
 		!drive.
-		
-+!drive
-	:	lkaSteering(STEERING) &
-		throttle(THROTTLE) &
-		not brake(BRAKE)
-	<-	setSteering(STEERING);
-		setThrottle(THROTTLE);
-		setBrake(0);
-		!drive.
-		
-+!drive
-	:	lkaSteering(STEERING) &
-		not throttle(THROTTLE) &
-		brake(BRAKE)
-	<-	setSteering(STEERING);
-		setThrottle(0);
-		setBrake(BRAKE);
-		!drive.
-		
-+!drive
-	:	not lkaSteering(STEERING) &
-		throttle(THROTTLE) &
-		brake(BRAKE)
-	<-	setThrottle(THROTTLE);
-		setBrake(BRAKE);
-		!drive.
-		
-+!drive
-	:	lkaSteering(STEERING) &
-		not throttle(THROTTLE) &
-		not brake(BRAKE)
-	<-	setSteering(STEERING);
-		!drive.
-		
-+!drive
-	:	not lkaSteering(STEERING) &
-		throttle(THROTTLE) &
-		not brake(BRAKE)
-	<-	setThrottle(THROTTLE);
-		!drive.
-		
-+!drive
-	:	not lkaSteering(STEERING) &
-		not throttle(THROTTLE) &
-		brake(BRAKE)
-	<-	setBrake(BRAKE);
-		!drive.
+*/
 		
 // Catch plan
 +!drive
