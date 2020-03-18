@@ -1,20 +1,41 @@
 /**
  * @author	Patrick Gavigan
- * @date	17 March 2020
+ * @date	18 March 2020
  */
 
-// Initial goal 
-!drive.
+// Rule for setting the throttle
+//GoThrottle(THROTTLE) :-
+//	((((brake(B) & B == 0) | (not brake(_)))) & // Confirm no brake
+//	throttle(THROTTLE))							// Check for throttle
  
-// Main plan
+// Initial goal: drive the car
+!drive.
+
+// Drive car - set the brake
 +!drive
-	:	lkaSteering(ANGLE) |
-		throttle(THROTTLE) |
-		brake(BRAKE)
-	<-	setThrottle(1.0);
+	:	brake(BRAKE)
+	<-	//setThrottle(0);
+		setBrake(BRAKE);
+		!steer;
 		!drive.
-		
-// Catch plan
+
+// Drive the car - set the throttle
++!drive
+	: 	throttle(THROTTLE) 
+	<-	//setBrake(0);
+		setThrottle(THROTTLE);
+		!steer;
+		!drive.
+
+// Plan to ensure recursion
 +!drive
 	<-	!drive.
+		
+// Steer the car
++!steer
+	:	lkaSteering(STEERING)
+	<-	setSteering(STEERING).
+	
+// Default plan for steering
++!steer.
 

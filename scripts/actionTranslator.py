@@ -17,8 +17,16 @@ def actionReceiver(data, publishers):
 
     message = data.data
     rospy.loginfo("Recived command: " + message)
-    
+
+    # Extract the parameter    
     parameter = re.search(r'\((.*?)\)',message).group(1)
+    
+    # Deal with special case where an extra bracket hung around
+    if type(parameter) == str:
+        if "(" in parameter:
+            parameter = parameter.split('(')[1]
+    
+    # Extract the command
     command = message.split('(')[0]
     
     toSend = Float64()
