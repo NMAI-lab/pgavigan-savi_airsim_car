@@ -14,7 +14,7 @@
 // Drive car - set the brake
 +!drive
 	:	brake(BRAKE)
-	<-	setThrottle(0);
+	<-	//setThrottle(0);
 		setBrake(BRAKE);
 		!steer;
 		!drive.
@@ -22,7 +22,7 @@
 // Drive the car - set the throttle
 +!drive
 	: 	throttle(THROTTLE) 
-	<-	setBrake(0);
+	<-	//setBrake(0);
 		setThrottle(THROTTLE);
 		!steer;
 		!drive.
