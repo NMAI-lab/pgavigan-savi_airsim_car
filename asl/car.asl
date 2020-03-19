@@ -3,22 +3,33 @@
  * @date	18 March 2020
  */
 
-// Rule for setting the throttle
-//GoThrottle(THROTTLE) :-
-//	((((brake(B) & B == 0) | (not brake(_)))) & // Confirm no brake
-//	throttle(THROTTLE))							// Check for throttle
- 
 // Initial goal: drive the car
 !drive.
 
-// Drive car - set the brake and throttle
+// I have brake, throttle and steering
 +!drive
-	:	brake(BRAKE) & throttle(THROTTLE)
-	<-	setBrake(BRAKE);
-		setThrottle(THROTTLE);
-		!steer;
+	:	brake(BRAKE) & throttle(THROTTLE) & steering(STEERING)
+	<-	driveAction(BRAKE,THROTTLE,STEERING)
+		//setBrake(BRAKE);
+		//setThrottle(THROTTLE);
+		//setSteering(STEERING);
 		!drive.
 		
+// I have brake and throttle, not steering
++!drive
+	:	brake(BRAKE) & throttle(THROTTLE) & (not steering(_))
+	<-	driveAction(BRAKE,THROTTLE,)
+		//setBrake(BRAKE);
+		//setThrottle(THROTTLE);
+		!drive.
+
+// I have steering, not brake or throttle 
++!drive
+	:	((not brake(_)) & (not throttle(_))) & steering(STEERING)
+	<-	setSteering(STEERING);
+		!drive.		
+		
+/*		
 // Drive car - set the brake
 +!drive
 	:	brake(BRAKE) & not throttle(_)
@@ -46,4 +57,4 @@
 	
 // Default plan for steering
 +!steer.
-
+*/
