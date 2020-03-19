@@ -8,19 +8,20 @@
 
 // I have brake, throttle and steering
 +!drive
-	:	brake(BRAKE) & throttle(THROTTLE) & steering(STEERING)
-	<-	driveAction(BRAKE,THROTTLE,STEERING)
-		//setBrake(BRAKE);
-		//setThrottle(THROTTLE);
-		//setSteering(STEERING);
+	:	speedControl(BRAKE,THROTTLE) & steering(STEERING)
+	<-	driveActionBTS(BRAKE,THROTTLE,STEERING)
 		!drive.
 		
 // I have brake and throttle, not steering
 +!drive
-	:	brake(BRAKE) & throttle(THROTTLE) & (not steering(_))
-	<-	driveAction(BRAKE,THROTTLE,)
-		//setBrake(BRAKE);
-		//setThrottle(THROTTLE);
+	:	speedControl(BRAKE,THROTTLE) & (not steering(_))
+	<-	driveActionBT(BRAKE,THROTTLE)
+		!drive.
+		
+// I have steering, note brake and not throttle
++!drive
+	:	(not speedControl(_,_)) & steering(STEERING)
+	<-	driveActionBT(BRAKE,THROTTLE)
 		!drive.
 
 // I have steering, not brake or throttle 
